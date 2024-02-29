@@ -42,7 +42,7 @@ export default function Header() {
             );
           })}
           <Button asChild>
-            <Link href={"/login"}>Get Started</Link>
+            <Link href={"/sign-in"}>Get Started</Link>
           </Button>
           <ModeToggle />
         </ul>
@@ -50,7 +50,7 @@ export default function Header() {
 
       <div className="lg:hidden flex items-center space-x-6">
         <Button asChild>
-          <Link href={"/login"}>Get Started</Link>
+          <Link href={"/sign-in"}>Get Started</Link>
         </Button>
         <ModeToggle />
         <MenuDrawer />
