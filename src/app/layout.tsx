@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/custom/ThemeProvider";
-import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkProvider, currentUser } from "@clerk/nextjs";
 
 const inter = Outfit({
   subsets: ["latin"],

@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import { Button } from "../../../components/ui/button";
+import FilePreview from "./FilePreview";
 
-export default function UploadForm<T>() {
+export default function UploadForm<T>({ uploadBtnClick }: any) {
   const [files, setFiles] = useState<Array<T> | null>(null);
 
   const handleFileChange = (file: T) => {
-    if (file && file?.size > 20000000) {
+    if (file && file?.size > 100000000) {
       return alert("File size is too large");
     }
 
@@ -48,8 +49,13 @@ export default function UploadForm<T>() {
         />
       </label>
 
+      {files && (
+        <FilePreview file={files[0]} removeFile={() => setFiles(null)} />
+      )}
+
       <div className="flex items-center justify-center mt-10">
         <Button
+          onClick={() => uploadBtnClick(files)}
           disabled={!files}
           className="bg-red-500 text-white hover:bg-red-700 disabled:bg-gray-400"
         >
