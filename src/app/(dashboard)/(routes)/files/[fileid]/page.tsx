@@ -1,12 +1,18 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { ArrowLeftIcon, EyeIcon } from "lucide-react";
+import { ArrowLeftIcon, EyeIcon, Target } from "lucide-react";
 import { useEffect, useState } from "react";
 import { db } from "../../../../../../firebase";
 import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import Link from "next/link";
 
 interface PropsType {
   params: {
@@ -17,6 +23,8 @@ interface PropsType {
 export default function Upload({ params }: PropsType) {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [enablePassword, setEnablePassword] = useState<boolean>(false);
+  const BASE_URL = "http://localhost:3000";
 
   const id = params.fileid;
   const router = useRouter();
@@ -36,6 +44,10 @@ export default function Upload({ params }: PropsType) {
 
     getFiles();
   }, []);
+
+  const handleCheckBoxPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEnablePassword(!enablePassword);
+  };
 
   const onSavePassword = async () => {
     const docRef = doc(db, "files", `${id}`);
@@ -77,24 +89,43 @@ export default function Upload({ params }: PropsType) {
                 <p className="dark:text-white mb-4 leading-relaxed">
                   Uploaded By: {fileData.userEmail}
                 </p>
-                <div className="relative my-4">
+                <div className="flex items-center justify-center gap-x-2">
                   <input
-                    type={showPassword ? "text" : "password"}
-                    className="border w-full py-4 px-2"
-                    placeholder="Password For File"
-                    onChange={(e) => setPassword(e.target.value)}
+                    type="checkbox"
+                    name="ShowPassword"
+                    onChange={handleCheckBoxPassword}
                   />
-                  <Button
-                    variant={"link"}
-                    onClick={() => setShowPassword(!showPassword)}
-                  >
-                    {showPassword ? "Hide Password" : "ShowPassword"}
-                  </Button>
+                  <label htmlFor="ShowPassword">Set Password</label>
                 </div>
+                {enablePassword && (
+                  <div className="relative my-4">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      className="border w-full py-4 px-2"
+                      placeholder="Password For File"
+                      onChange={(e) => setPassword(e.target.value)}
+                    />
+                    <Button
+                      variant={"link"}
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? "Hide Password" : "Show Password"}
+                    </Button>
+                  </div>
+                )}
 
-                <div className="space-x-6">
+                <div className="space-x-6 mt-5">
                   <Button onClick={onSavePassword}>Save Password</Button>
-                  <Button variant={"outline"}>Share URL</Button>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <Button variant={"outline"}>Share URL</Button>
+                    </PopoverTrigger>
+                    <PopoverContent>
+                      <Link
+                        href={`${BASE_URL}/filedownload/${id}`}
+                      >{`${BASE_URL}/filedownload/${id}`}</Link>
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
             </div>
