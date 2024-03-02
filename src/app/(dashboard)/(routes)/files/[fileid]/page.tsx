@@ -26,7 +26,7 @@ export default function Upload({ params }: PropsType) {
   const [enablePassword, setEnablePassword] = useState<boolean>(false);
   const BASE_URL = "http://localhost:3000";
 
-  const id = params.fileid;
+  const id = params?.fileid;
   const router = useRouter();
   const [fileData, setFileData] = useState<any>([]);
 
@@ -43,7 +43,7 @@ export default function Upload({ params }: PropsType) {
     };
 
     getFiles();
-  }, []);
+  }, [id]);
 
   const handleCheckBoxPassword = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEnablePassword(!enablePassword);

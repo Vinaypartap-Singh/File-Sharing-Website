@@ -5,7 +5,7 @@ export default function Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div>
-      <SideBar children={children} />
+      <SideBar>{children}</SideBar>
     </div>
   );
 }

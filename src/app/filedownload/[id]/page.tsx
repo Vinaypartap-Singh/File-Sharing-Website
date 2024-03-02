@@ -28,7 +28,7 @@ export default function FileDownload({ params }: { params: { id: string } }) {
     };
 
     getFiles();
-  }, []);
+  }, [id]);
 
   console.log(password, fileData?.password);
   console.log(fileData?.password);
