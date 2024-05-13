@@ -50,18 +50,22 @@ export default function Upload({ params }: PropsType) {
   };
 
   const onSavePassword = async () => {
-    const docRef = doc(db, "files", `${id}`);
-    await updateDoc(
-      docRef,
-      {
-        password: password,
-      },
-      { merge: true }
-    );
+    if (password === "" || password === " ") {
+      alert("Invalid Password !");
+    } else {
+      const docRef = doc(db, "files", `${id}`);
+      await updateDoc(
+        docRef,
+        {
+          password: password,
+        },
+        { merge: true }
+      );
 
-    setPassword("");
+      setPassword("");
 
-    alert("Password Saved");
+      alert("Password Saved");
+    }
   };
 
   return (
