@@ -24,7 +24,7 @@ export default function Upload({ params }: PropsType) {
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [enablePassword, setEnablePassword] = useState<boolean>(false);
-  const BASE_URL = "http://localhost:3000";
+  const BASE_URL = "https://sync-sharing.netlify.app";
 
   const id = params?.fileid;
   const router = useRouter();
