@@ -1,4 +1,5 @@
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -18,7 +19,9 @@ export default function Hero() {
         by keeping everyone on the same page.
       </p>
       <div className="flex items-center justify-center gap-10">
-        <Button>Get Started</Button>
+        <Button asChild>
+          <Link href="/upload">Get Started</Link>
+        </Button>
         <Button variant={"outline"}>Learn More</Button>
       </div>
     </div>

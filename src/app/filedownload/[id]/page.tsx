@@ -30,9 +30,6 @@ export default function FileDownload({ params }: { params: { id: string } }) {
     getFiles();
   }, [id]);
 
-  console.log(password, fileData?.password);
-  console.log(fileData?.password);
-
   return (
     <div className="h-screen w-full flex flex-col justify-center items-center">
       {fileData ? (
