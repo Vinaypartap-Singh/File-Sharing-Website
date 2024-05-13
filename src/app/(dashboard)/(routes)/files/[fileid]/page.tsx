@@ -124,7 +124,7 @@ export default function Upload({ params }: PropsType) {
                     <PopoverTrigger asChild>
                       <Button variant={"outline"}>Share URL</Button>
                     </PopoverTrigger>
-                    <PopoverContent>
+                    <PopoverContent className="w-fit">
                       <Link
                         href={`${BASE_URL}/filedownload/${id}`}
                       >{`${BASE_URL}/filedownload/${id}`}</Link>
